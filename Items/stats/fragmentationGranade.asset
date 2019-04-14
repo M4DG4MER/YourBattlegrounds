@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6baddaa36d15141a1389ecabc6e4ec, type: 3}
+  m_Name: fragmentationGranade
+  m_EditorClassIdentifier: 
+  ItemName: Granade
+  SlotType: Throwable
+  HideOnTake: 1
+  ShowOnUse: 1
+  Icon: {fileID: 21300020, guid: 2f84b5c8ce2b18549a175522847db7d6, type: 3}
+  baseRotation: {x: 0, y: 0, z: 0}
+  animation: Granade
+  animLayer: UpperBody
+  Duration: 0
+  EffectStrength: 0
+  EffectStat: 
+  MaxUnits: 3
+  ConsumeRate: 1
+  DisableLeftHand: 1
+  DisableRightHands: 1
+  Area: 1
+  maxDamage: 25
+  damageArea: 5
+  throwDelayTime: 0.5
+  animDelayTime: 1
+  explosionDelayTime: 4
+  prefab: {fileID: 114245918387937018, guid: 75f20eb33ae36d842971ff2c3720aeaa, type: 2}

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c04c2434f9bedd4e8d9ad9571605463, type: 3}
+  m_Name: playerStats
+  m_EditorClassIdentifier: 
+  speed: 150
+  runningSpeedIncrement: 1.5
+  rotationSpeed: 50
+  jumpForce: 200
+  minAngle: -50
+  maxAngle: 30
+  cameraSpeed: 25
+  throwForce: 10
+  maxFallSpeed: 50
+  crouchHeightOffset: -0.57
+  crouchPosOffset: -0.29
+  MaxLife: 100
+  unarmedAttacks:
+  - MeleUnnarmedLayer: UpperBody
+    MeleUnnarmedState: Boxing
+    shootTime: 1
+    damage: 0
+    range: 0
+    area: 0
