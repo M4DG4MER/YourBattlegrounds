@@ -43,8 +43,8 @@ namespace tutoriales
                 randomVector *= randomDiameter;
                 randomVector += tr.position;
                 
-                ItemController item = Instantiate<ItemController>(randomItemPrefab,  parent);
-                Vector3 euler = item.mTransform.eulerAngles;
+                //ItemController item = Instantiate<ItemController>(randomItemPrefab,  parent);
+                Vector3 euler = randomItemPrefab.transform.eulerAngles;
                 Quaternion rotation = Quaternion.Euler(new Vector3(euler.x, Random.Range(0, 360), euler.z));
 
                 Photon.Pun.PhotonNetwork.Instantiate("items/" + randomItemPrefab.name, randomVector, rotation);

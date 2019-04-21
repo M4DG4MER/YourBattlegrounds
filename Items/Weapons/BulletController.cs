@@ -32,6 +32,7 @@ namespace tutoriales
             mtransform.rotation = rotation;
             rg.velocity = this.transform.forward * power;
 
+            this.deltatime = 0;
             this.damage = damage;
             this.lifeTime = lifeTime;
 
@@ -64,7 +65,7 @@ namespace tutoriales
 
             RaycastHit hit;
             
-            if (Physics.Raycast(lastPosition, dir.normalized, out hit, dir.magnitude))
+            if (Physics.Raycast(lastPosition, dir.normalized, out hit, dir.magnitude, ~LayerMask.GetMask("player")))
             {
                 GameObject go = hit.collider.gameObject;
 
@@ -82,6 +83,7 @@ namespace tutoriales
                 {
                     HolesPool.Pool.Impact(go.tag, hit.point, hit.normal);
                     this.gameObject.SetActive(false);
+                    Debug.Log("Impacto en NO HITBOXMASK");
                 }
 
             }
