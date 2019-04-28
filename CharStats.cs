@@ -17,6 +17,7 @@ namespace tutoriales
 
         public float throwForce = 50;
         public float maxFallSpeed = 50;
+        public float Weight = 20f;
 
         public float camRadius = 0.25f;
 

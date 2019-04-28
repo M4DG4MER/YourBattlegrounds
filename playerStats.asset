@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -14,12 +15,14 @@ MonoBehaviour:
   speed: 150
   runningSpeedIncrement: 1.5
   rotationSpeed: 50
-  jumpForce: 200
+  jumpForce: 10
   minAngle: -50
   maxAngle: 30
   cameraSpeed: 25
   throwForce: 10
-  maxFallSpeed: 50
+  maxFallSpeed: 20
+  Weight: 3
+  camRadius: 0.25
   crouchHeightOffset: -0.57
   crouchPosOffset: -0.29
   MaxLife: 100

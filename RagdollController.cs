@@ -76,9 +76,7 @@ namespace tutoriales
             }
 
             anim.enabled = !state;
-            body.useGravity = !state;
             body.detectCollisions = !state;
-            body.isKinematic = state;
         }
 
 

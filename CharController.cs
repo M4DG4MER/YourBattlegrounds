@@ -22,7 +22,7 @@ namespace tutoriales
         Rigidbody rg;
         internal Animator anim;
         RagdollController ragdoll;
-        CapsuleCollider coll;
+        CharacterController coll;
         internal InventaryController inventary;
         internal IkHandler ik;
 
@@ -38,6 +38,7 @@ namespace tutoriales
         public Transform LookAt;
         private Transform cam;
 
+        internal Vector3 endSpeed;
         internal float rotY = 0f;
         internal float rotX = 0f;
 
@@ -73,7 +74,6 @@ namespace tutoriales
         internal Vector2 moveAnim;
         private float deltaT;
 
-
         public InputController _input;
 
         private bool initialized = false;
@@ -91,7 +91,7 @@ namespace tutoriales
         {
             tr = this.transform;
             rg = GetComponent<Rigidbody>();
-            coll = GetComponent<CapsuleCollider>();
+            coll = GetComponent<CharacterController>();
             anim = GetComponentInChildren<Animator>();
             ik = GetComponentInChildren<IkHandler>();
             inventary = GetComponent<InventaryController>();
@@ -223,55 +223,57 @@ namespace tutoriales
 
                 CameraShoulder.localRotation = localRotation;
             }
+
+
             
-
-
-            Vector3 side = Stats.speed * moveDelta.x * deltaT * tr.right;
-            Vector3 forward = Stats.speed * moveDelta.y * deltaT * tr.forward;
-
-            Vector3 endSpeed = side + forward;
-
-
-            RaycastHit hit;
-            states.OnGround = Physics.Raycast(this.tr.position, -tr.up, out hit, .2f);
-            if (states.OnGround)
+            float fall = endSpeed.y + Physics.gravity.y * Stats.Weight * deltaT;
+            fall = Mathf.Clamp(fall, -Stats.maxFallSpeed, Stats.jumpForce);
+            
+            if (coll.isGrounded)
             {
+                Vector3 side =  moveDelta.x * tr.right;
+                Vector3 forward = moveDelta.y * tr.forward;
+
+                float speedMultiplier = Stats.speed;
+                
                 if (states.Crouching)
                     OnCrouch();
                 else
                 {
                     if (states.Running)
-                        endSpeed *= Stats.runningSpeedIncrement;
+                        speedMultiplier *= Stats.runningSpeedIncrement;
                 }
 
+                endSpeed = (side + forward).normalized * deltaT * speedMultiplier;
+                
                 if (states.Jumping)
                 {
                     if (states.Crouch)
                         OnCrouch();
                     else
-                        Jump();
+                    {
+                        fall = Stats.jumpForce;
+                    }
                 }
-
-                Vector3 sp = rg.velocity;
-                endSpeed.y = sp.y;
-
-                rg.velocity = endSpeed;
             }
             else
             {
-                Vector3 sp = rg.velocity;
-                sp.y = Mathf.Clamp(sp.y, -Stats.maxFallSpeed, 0);
-                rg.velocity = sp;
-
-
                 if (states.Crouch)
                     OnCrouch();
             }
 
+            endSpeed.y = fall;
 
+
+            RaycastHit hit;
+            states.OnGround = (coll.isGrounded || Physics.Raycast(this.tr.position, -tr.up, out hit, .5f));
+            
+
+            coll.Move(endSpeed * deltaT);
             moveAnim = moveDelta * (states.Running ? 2 : 1);
         }
 
+   
 
         private void ItemsControl()
         {
@@ -472,11 +474,6 @@ namespace tutoriales
 
         }
 
-
-        public void Jump()
-        {
-            rg.AddForce(tr.up * Stats.jumpForce);
-        }
 
 
         public void OnCrouch()
