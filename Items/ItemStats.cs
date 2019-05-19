@@ -8,7 +8,7 @@ namespace tutoriales
     [CreateAssetMenu(fileName = "itemStats", menuName = "tutoriales/item stats")]
     public class ItemStats : ScriptableObject
     {
-
+        public bool IsPickeable = true;
         public string ItemName;
         public string SlotType;
 

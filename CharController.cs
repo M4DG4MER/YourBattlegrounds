@@ -315,7 +315,12 @@ namespace tutoriales
                         }
                         if (states.Interacting)
                         {
-                            Take(item);
+                            if (item.Stats.IsPickeable)
+                                Take(item);
+                            else
+                            {
+                                item.Use(this);
+                            }
                             ///take MULTI// inventary.AddItem(this, item); 
                         }
                     }
