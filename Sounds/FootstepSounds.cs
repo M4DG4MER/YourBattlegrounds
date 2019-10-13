@@ -8,23 +8,27 @@ namespace tutoriales.Sounds
     public class FootstepSounds : MonoBehaviour
     {
         CharacterController collider;
+        AudioSource source;
+
+        public TextureMaterialCollection TextureMaterialCollection;
+        public SoundEvent Event;
 
         private void Awake()
         {
             collider = GetComponentInParent<CharacterController>();
-
+            source = GetComponent<AudioSource>();
         }
 
-        private void Update()
-        {
-            FootStep();
-        }
+
 
         public void FootStep()
         {
             Texture t = GetOnTexture();
 
-            Debug.Log(t?.name ?? "NULL");
+            TextureEvent _event = new TextureEvent() { EventType = Event, _Texture = t };
+            TextureMaterialCollection.Play(_event, source, float.MaxValue);
+
+            //Debug.Log(t?.name ?? "NULL");
             
         }
 
