@@ -22,7 +22,7 @@ namespace tutoriales
 
         private void OnEnable()
         {
-            sliders = GetComponentsInChildren<Slider>();
+            sliders = GetComponentsInChildren<Slider>(true);
         }
 
         public void Add(Stat stat)

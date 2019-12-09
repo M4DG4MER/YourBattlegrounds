@@ -10,6 +10,7 @@ namespace tutoriales
     {
         public bool Active = true;
         public bool Player = true;
+        public bool InMainMenu = false;
 
         public CharStats Stats;
         public Stat life;
@@ -113,9 +114,9 @@ namespace tutoriales
 
         void InitStatsInventary()
         {
-            StatsViewer.Viewer().Add(life);
-            StatsViewer.Viewer().Add(shield);
-            StatsViewer.Viewer().Add(armor);
+            StatsViewer.Viewer()?.Add(life);
+            StatsViewer.Viewer()?.Add(shield);
+            StatsViewer.Viewer()?.Add(armor);
             inventary.Initiliaze(Player, this);
         }
 
@@ -129,9 +130,12 @@ namespace tutoriales
 
             if (Player)
             {
-                PlayerControl();
-                AreaControl();
-                CameraControl();
+                if (!InMainMenu)
+                {
+                    PlayerControl();
+                    AreaControl();
+                    CameraControl();
+                }
             }
             else
             {
@@ -266,7 +270,7 @@ namespace tutoriales
 
 
             RaycastHit hit;
-            states.OnGround = (coll.isGrounded || Physics.Raycast(this.tr.position, -tr.up, out hit, .5f));
+            states.OnGround = InMainMenu || (coll.isGrounded || Physics.Raycast(this.tr.position, -tr.up, out hit, .5f));
             
 
             coll.Move(endSpeed * deltaT);
